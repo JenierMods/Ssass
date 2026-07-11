@@ -1,26 +1,26 @@
-# apps/web — Frontend React con Next.js
+# apps/web — Frontend funcional interactivo
 
-Directorio reservado para la aplicación web del SaaS.
+Esta aplicación contiene una primera versión funcional e interactiva del SaaS. Está construida con HTML, CSS y JavaScript sin dependencias externas para que pueda ejecutarse sin instalar paquetes de npm. Esto permite probar flujos de producto y luego conectarla a la API Laravel.
 
-## Por qué Next.js
+## Funciones disponibles
 
-Next.js usa React y permite SSR/SSG, rutas optimizadas, code splitting, streaming y buen rendimiento percibido. Es una opción sólida cuando el SaaS necesita paneles rápidos, páginas públicas con SEO y crecimiento de tráfico.
+- Inicio de sesión simulado con nombre y correo.
+- Dashboard con métricas calculadas automáticamente.
+- Gestión de clientes o tenants con creación y eliminación.
+- Operaciones internas con tareas y cambio de estado.
+- Vista de planes con cálculo mensual o anual.
+- Persistencia local con `localStorage` para que los cambios no se pierdan al recargar.
+- Diseño responsive para escritorio, tablet y móvil.
 
-## Estructura recomendada
+## Ejecutar localmente
 
-```text
-src/
-├── app/                 # App Router de Next.js
-├── components/          # Componentes reutilizables
-├── features/            # Funcionalidades por dominio
-├── lib/                 # Clientes HTTP, auth, helpers
-├── styles/              # Estilos globales
-└── types/               # Tipos TypeScript
+```bash
+cd apps/web
+npm run dev
 ```
 
-## Paquetes recomendados
+Luego abre `http://localhost:5173`.
 
-- `@tanstack/react-query` para cache de datos del servidor.
-- `zod` para validar respuestas y formularios.
-- `axios` o `fetch` wrapper para consumir la API.
-- `zustand` solo para estado cliente realmente global.
+## Próximo paso recomendado
+
+Cuando el backend Laravel esté creado en `apps/api`, reemplaza los datos locales por llamadas reales a endpoints versionados de la API, por ejemplo `/api/v1/tenants`, `/api/v1/tasks` y `/api/v1/billing/plans`.

@@ -3,11 +3,11 @@
 Este repositorio define una estructura base para construir un SaaS moderno con:
 
 - **Backend:** PHP 8.3 + Laravel 11 como API principal.
-- **Frontend:** React con **Next.js** para SSR/SSG, rendimiento y buena experiencia SEO.
+- **Frontend:** página funcional servida como app estática; preparada para migrar a React o integrarse con Next.js si necesitas SSR/SEO avanzado.
 - **Escalabilidad:** PostgreSQL, Redis, colas, cache, jobs asíncronos, contenedores y separación por capas.
 - **Operación:** Docker Compose para desarrollo, healthchecks, documentación técnica y convenciones de monorepo.
 
-> Nota: este repo contiene la estructura profesional inicial. Los proyectos reales de Laravel y Next.js se deben generar dentro de `apps/api` y `apps/web` usando los comandos indicados abajo.
+> Nota: este repo contiene una estructura profesional inicial y una primera página funcional en `apps/web`. El backend Laravel real se debe generar dentro de `apps/api` usando los comandos indicados abajo.
 
 ## Estructura principal
 
@@ -15,7 +15,7 @@ Este repositorio define una estructura base para construir un SaaS moderno con:
 .
 ├── apps/
 │   ├── api/                 # Laravel API: dominio, módulos, colas, eventos, workers
-│   └── web/                 # Next.js + React: app router, componentes, SDK cliente
+│   └── web/                 # Panel funcional interactivo del SaaS
 ├── packages/
 │   ├── contracts/           # OpenAPI, JSON Schemas y contratos compartidos
 │   └── ui/                  # Librería UI compartida para React
@@ -40,12 +40,11 @@ php artisan install:api
 php artisan vendor:publish --provider="Laravel\\Sanctum\\SanctumServiceProvider"
 ```
 
-### 2. Crear el frontend Next.js + React
+### 2. Ejecutar la página funcional
 
 ```bash
-npx create-next-app@latest apps/web --typescript --eslint --app --src-dir --tailwind
 cd apps/web
-npm install @tanstack/react-query zod axios zustand
+npm run dev
 ```
 
 ### 3. Levantar servicios locales
@@ -62,7 +61,7 @@ make up
 - **Trabajo asíncrono:** emails, facturación, reportes e integraciones externas van por colas.
 - **Cache controlada:** Redis para sesiones, cache, rate limiting y colas.
 - **Observabilidad:** logs estructurados, métricas, healthchecks y trazabilidad desde la primera versión.
-- **Frontend desacoplado:** Next.js consume la API y mantiene validaciones compartidas con Zod/OpenAPI.
+- **Frontend desacoplado:** la página consume la API y puede mantener validaciones compartidas con Zod/OpenAPI cuando se conecte al backend.
 
 ## Documentación
 
