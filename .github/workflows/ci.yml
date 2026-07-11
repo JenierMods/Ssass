@@ -1,0 +1,20 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  structure:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate repository structure
+        run: |
+          test -d apps/api
+          test -d apps/web
+          test -d packages/contracts
+          test -d packages/ui
+          test -f docker-compose.yml
+          test -f docs/architecture.md
